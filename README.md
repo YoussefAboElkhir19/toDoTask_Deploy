@@ -61,17 +61,24 @@ From the project root:
 docker compose up --build
 ```
 
-If your Docker installation uses the older command format, this also works:
-
-```bash
-docker-compose up --build
-```
-
 This starts:
 
-- Frontend on `http://localhost:3000`
-- Backend on `http://localhost:5000`
-- MongoDB on `localhost:27017`
+- **Nginx Reverse Proxy** on `http://localhost` (port 80)
+- Frontend on `http://localhost` (via Nginx)
+- Backend API on `http://localhost/api` (via Nginx)
+- MongoDB on internal network only (not exposed)
+
+### Access the Application
+
+- **Frontend**: http://localhost
+- **Backend API**: http://localhost/api/todos
+- **Health Check**: http://localhost/health
+
+### On AWS EC2
+
+- **Frontend**: http://3.90.3.25
+- **Backend API**: http://3.90.3.25/api/todos
+- **Health Check**: http://3.90.3.25/health
 
 ## Stop Docker
 

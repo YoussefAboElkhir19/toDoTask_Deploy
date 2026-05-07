@@ -1,21 +1,33 @@
 version: "3.9"
 
 services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - client
+      - server
+    networks:
+      - app-network
+
   client:
     build: ./client
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     depends_on:
       - server
     environment:
-      - REACT_APP_API_URL=http://server:5000
+      - REACT_APP_API_URL=http://localhost/api
     networks:
       - app-network
 
   server:
     build: ./server
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     depends_on:
       - mongo
     environment:
@@ -25,8 +37,8 @@ services:
 
   mongo:
     image: mongo:latest
-    ports:
-      - "27017:27017"
+    expose:
+      - "27017"
     volumes:
       - mongo_data:/data/db
     networks:
