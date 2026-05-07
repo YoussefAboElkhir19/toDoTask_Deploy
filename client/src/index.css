@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-blue-50 to-indigo-50;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 font-medium;
+  }
+
+  .btn-edit {
+    @apply px-3 py-1 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition-colors duration-200 text-sm;
+  }
+
+  .input-field {
+    @apply flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200;
+  }
+
+  .todo-item {
+    @apply flex items-center justify-between gap-3 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-lg;
+  }
+}
