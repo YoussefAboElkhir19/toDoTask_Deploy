@@ -1,7 +1,7 @@
 FROM node:18 AS build
 WORKDIR /app
 COPY client/package.json client/package-lock.json* ./
-RUN npm install --legacy-peer-deps
+RUN npm install
 COPY client/ .
 ENV NODE_OPTIONS=--max_old_space_size=512
 ENV GENERATE_SOURCEMAP=false
