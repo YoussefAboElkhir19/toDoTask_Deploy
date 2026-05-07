@@ -3,6 +3,8 @@ WORKDIR /app
 COPY client/package.json client/package-lock.json* ./
 RUN npm install --legacy-peer-deps
 COPY client/ .
+ENV NODE_OPTIONS=--max_old_space_size=512
+ENV GENERATE_SOURCEMAP=false
 RUN npm run build
 
 FROM nginx:alpine
