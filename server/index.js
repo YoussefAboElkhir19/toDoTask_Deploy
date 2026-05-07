@@ -15,6 +15,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/todos", todoRoutes);
+app.use("/api/todo", todoRoutes);
 
 app.use((req, res) => {
     res.status(404).json({ error: "Route not found" });

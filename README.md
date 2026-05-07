@@ -53,6 +53,14 @@ If you run the server outside Docker, you need MongoDB available locally or you 
 - `PUT /api/todos/:id` - update todo title or completion state
 - `DELETE /api/todos/:id` - delete todo
 
+Backward-compatible alias:
+
+- `GET /api/todo` - same as `/api/todos`
+- `GET /api/todo/:id` - same as `/api/todos/:id`
+- `POST /api/todo` - same as `/api/todos`
+- `PUT /api/todo/:id` - same as `/api/todos/:id`
+- `DELETE /api/todo/:id` - same as `/api/todos/:id`
+
 ## Run With Docker
 
 From the project root:
