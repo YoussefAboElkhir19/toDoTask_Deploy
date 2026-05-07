@@ -8,13 +8,13 @@ function App() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const apiBaseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+    const apiBaseUrl = process.env.REACT_APP_API_URL || "/api";
 
     const fetchTodos = async () => {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch(`${apiBaseUrl}/api/todos`);
+            const res = await fetch(`${apiBaseUrl}/todos`);
             const data = await res.json();
             setTodos(data);
         } catch (err) {
@@ -31,7 +31,7 @@ function App() {
         }
 
         try {
-            const res = await fetch(`${apiBaseUrl}/api/todos`, {
+            const res = await fetch(`${apiBaseUrl}/todos`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -54,7 +54,7 @@ function App() {
 
     const updateTodo = async (todoId, payload) => {
         try {
-            const res = await fetch(`${apiBaseUrl}/api/todos/${todoId}`, {
+            const res = await fetch(`${apiBaseUrl}/todos/${todoId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -77,7 +77,7 @@ function App() {
 
     const deleteTodo = async (todoId) => {
         try {
-            const res = await fetch(`${apiBaseUrl}/api/todos/${todoId}`, {
+            const res = await fetch(`${apiBaseUrl}/todos/${todoId}`, {
                 method: "DELETE"
             });
 
