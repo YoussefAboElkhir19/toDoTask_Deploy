@@ -8,13 +8,26 @@ function App() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const apiBaseUrl = process.env.REACT_APP_API_URL || "/api";
+    const apiBaseUrl = "/api";
+
+    const readErrorMessage = async (res, fallback) => {
+        try {
+            const data = await res.json();
+            return data.error || fallback;
+        } catch {
+            return fallback;
+        }
+    };
 
     const fetchTodos = async () => {
         setLoading(true);
         setError(null);
         try {
             const res = await fetch(`${apiBaseUrl}/todos`);
+            if (!res.ok) {
+                setError("Failed to fetch todos");
+                return;
+            }
             const data = await res.json();
             setTodos(data);
         } catch (err) {
@@ -39,8 +52,7 @@ function App() {
                 body: JSON.stringify({ title })
             });
             if (!res.ok) {
-                const error = await res.json();
-                setError(error.error);
+                setError(await readErrorMessage(res, "Failed to add todo"));
                 return;
             }
             setTitle("");
@@ -63,8 +75,7 @@ function App() {
             });
 
             if (!res.ok) {
-                const error = await res.json();
-                setError(error.error);
+                setError(await readErrorMessage(res, "Failed to update todo"));
                 return;
             }
 
@@ -82,8 +93,7 @@ function App() {
             });
 
             if (!res.ok) {
-                const error = await res.json();
-                setError(error.error);
+                setError(await readErrorMessage(res, "Failed to delete todo"));
                 return;
             }
 
@@ -200,8 +210,8 @@ function App() {
                                             />
                                         ) : (
                                             <span className={`flex-1 text-lg ${todo.completed
-                                                    ? "line-through text-gray-400"
-                                                    : "text-gray-800"
+                                                ? "line-through text-gray-400"
+                                                : "text-gray-800"
                                                 }`}>
                                                 {todo.title}
                                             </span>

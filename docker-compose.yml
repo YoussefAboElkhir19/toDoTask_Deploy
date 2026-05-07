@@ -8,19 +8,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - client
       - server
-    networks:
-      - app-network
-
-  client:
-    build: ./client
-    expose:
-      - "3000"
-    depends_on:
-      - server
-    environment:
-      - REACT_APP_API_URL=/api
     networks:
       - app-network
 
