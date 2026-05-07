@@ -1,5 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const crypto = require("crypto");
+
+if (!global.crypto) {
+    global.crypto = crypto;
+}
 
 const connectDB = require("./config/db");
 const todoRoutes = require("./routes/todos");
